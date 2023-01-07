@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,14 +16,15 @@ class AuthorsTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create('ja_JP');
         for ($i = 1; $i <= 10; $i++) {
             $author = [
-                'name' => '著者名' . $i,
-                'kana' => 'チョシャメイ' . $i,
+                'name' => $faker->name,
+                'kana' => $faker->kanaName,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
-            \Illuminate\Support\Facades\DB::table('authors')->insert($author);
+            DB::table('authors')->insert($author);
         }
     }
 }
