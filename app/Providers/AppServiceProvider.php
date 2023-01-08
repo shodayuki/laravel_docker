@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\BlowfishEncrypter;
+use App\DataProvider\PublisherRepositoryInterface;
+use App\Domain\Repository\PublisherRepository;
 use Illuminate\Encryption\MissingAppKeyException;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
 
                 return new BlowfishEncrypter($this->parseKey($config));
             }
+        );
+
+        $this->app->bind(
+            PublisherRepositoryInterface::class,
+            PublisherRepository::class
         );
     }
 
