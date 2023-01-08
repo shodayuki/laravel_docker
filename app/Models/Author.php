@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Author extends Model
 {
     use SoftDeletes;
+
+    public function books()
+    {
+        return $this->hasMany('\App\Models\Book');
+    }
+
     public function getKanaAttribute(string $value): string
     {
         // KANAカラムの値を半角カナに変換
